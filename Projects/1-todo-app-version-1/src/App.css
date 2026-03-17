@@ -1,0 +1,24 @@
+h3{
+    font-weight: 700;
+    font-size: 40px;
+    margin:10px;
+    margin-bottom: 25px;
+}
+
+.todo-container{
+    margin:auto 10%;
+}
+
+.items-container{
+    background-color: blueviolet;
+    border-radius: 5px;
+}
+
+.kg-row{
+    margin:5px;
+    padding:5px;
+}
+
+.kg-button{
+    min-width:80px;
+}

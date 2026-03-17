@@ -1,0 +1,12 @@
+.foodInput {
+    width:250px;
+    padding: 5px;
+    margin: 10px;
+    border: 2px solid red;
+    border-radius: 5px;
+}
+
+.button{
+    float:right;
+    margin-right: 15px;
+}

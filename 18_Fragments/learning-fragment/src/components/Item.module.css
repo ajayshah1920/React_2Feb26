@@ -1,0 +1,16 @@
+
+.kg-item{
+  /* background-color: rgb(229, 235, 235) ; */
+  padding: 5px;
+}
+
+.kg-span{
+  color: brown;
+  font-family: sans-serif;
+  font-weight: 700;
+}
+
+.button{
+  float: right;
+}
+
