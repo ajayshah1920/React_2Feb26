@@ -8,7 +8,7 @@ const Post =({ postData }) =>{
 
     return (
         <div className="card m-2">
-            {/* <img src="./images/no-image.jpg" className="card-img-top" alt="..." width="80" height="240"/> */}
+       
             <img src={postData.photoUrl} className="card-img-top" alt="..." width="60" height="240"/>
             <div className="card-body">
                 <h5 className="card-title">{postData.title}</h5>
