@@ -12,3 +12,6 @@
 .bodySection{
     min-height: 600px;
 }
+.welcome-message{
+    margin:10% auto;
+}

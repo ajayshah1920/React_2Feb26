@@ -4,6 +4,7 @@ export const PostList = createContext({
     postList: [],
     editPost: {},
     addPost: {},
+    addInitialPosts:{},
     deletePost: {}
 });
 
@@ -14,7 +15,10 @@ const postListReducer =(currentPostList, action)=> {
         newPostList = currentPostList.filter((post)=> post.id !== action.payload.postId);
     }
     else if(action.type==='ADD_POST'){
-        newPostList = [...currentPostList, action.payload]
+        newPostList = [...currentPostList, action.payload];
+    }
+    else if(action.type==='ADD_INITIAL_POSTS'){
+        newPostList = action.payload.posts;
     }
      else if(action.type==='EdIT_POST'){
         newPostList = currentPostList.filter((post)=> post.id === action.payload.postId)
@@ -25,12 +29,13 @@ const postListReducer =(currentPostList, action)=> {
 }
 
 const PostListProvider =({children})=>{
-    const [postList, dispatchPostList]= useReducer(postListReducer, DEFAULT_POST_LIST);
+    // const [postList, dispatchPostList]= useReducer(postListReducer, DEFAULT_POST_LIST);
+    const [postList, dispatchPostList]= useReducer(postListReducer, []);
 
     const addPost=(userId,postTitle,postBody,postReactions,tags)=> {
         console.log(`${userId} ${postTitle} ${postBody} ${postReactions} ${tags}`);
         
-        const addpostData ={
+        const addpostData = {
             type:'ADD_POST',
             payload: {
                 id: Date.now(),
@@ -67,8 +72,17 @@ const PostListProvider =({children})=>{
         dispatchPostList(editItem);
     }
     
+    const addInitialPosts=(posts)=> {
+        const addInitialposts={
+            type:'ADD_INITIAL_POSTS',
+            payload:{
+                posts
+            }
+        };
+        dispatchPostList(addInitialposts);
+    }
 
-    return <PostList.Provider value={{postList, addPost, deletePost, editPost}}>
+    return <PostList.Provider value={{postList, addPost, deletePost, editPost, addInitialPosts}}>
         {children}
     </PostList.Provider>
 }
