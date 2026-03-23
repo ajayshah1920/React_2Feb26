@@ -1,3 +1,4 @@
+import { useCallback, useMemo } from "react";
 import { createContext, useReducer } from "react";
 
 export const PostList = createContext({
@@ -20,7 +21,7 @@ const postListReducer =(currentPostList, action)=> {
     else if(action.type==='ADD_INITIAL_POSTS'){
         newPostList = action.payload.posts;
     }
-     else if(action.type==='EdIT_POST'){
+     else if(action.type==='EdIT_POST') {
         newPostList = currentPostList.filter((post)=> post.id === action.payload.postId)
     //    newPostList =  currentPostList.map(post => 
     //     (action.payload.postId==post.id) ? {...post, title:editItem.title, body: editItem.body, reactions} : post )
@@ -34,6 +35,9 @@ const PostListProvider =({children})=>{
 
     const addPost=(userId,postTitle,postBody,postReactions,tags)=> {
         console.log(`${userId} ${postTitle} ${postBody} ${postReactions} ${tags}`);
+
+    const arr=[5,2,7,9,4]
+    const sortArr = useMemo(()=> arr.sort(), [arr]);
         
         const addpostData = {
             type:'ADD_POST',
@@ -50,7 +54,8 @@ const PostListProvider =({children})=>{
 
         dispatchPostList(addpostData);
     }
-    const deletePost=(postId)=> {
+
+    const deletePost= useCallback((postId)=> {
         console.log(postId);
         const deleteItem={
             type:'DELETE_POST',
@@ -60,7 +65,7 @@ const PostListProvider =({children})=>{
         };
 
         dispatchPostList(deleteItem);
-    }
+    }, [])
 
     const editPost=(postId)=>{
         const editItem={
@@ -71,6 +76,29 @@ const PostListProvider =({children})=>{
         };
         dispatchPostList(editItem);
     }
+    
+
+    // const deletePost=(postId)=> {
+    //     console.log(postId);
+    //     const deleteItem={
+    //         type:'DELETE_POST',
+    //         payload:{
+    //             postId
+    //         }
+    //     };
+
+    //     dispatchPostList(deleteItem);
+    // }
+
+    // const editPost=(postId)=>{
+    //     const editItem={
+    //         type:'EDIT_POST',
+    //         payload:{
+    //             postId
+    //         }
+    //     };
+    //     dispatchPostList(editItem);
+    // }
     
     const addInitialPosts=(posts)=> {
         const addInitialposts={

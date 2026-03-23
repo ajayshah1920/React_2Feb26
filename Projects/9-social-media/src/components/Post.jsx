@@ -3,7 +3,6 @@ import { PostList } from '../store/post-list-store'
 import { useContext } from 'react';
 
 const Post =({ postData }) =>{
-    console.log(postData);
     const { deletePost, editPost } = useContext(PostList);
 
     return (
