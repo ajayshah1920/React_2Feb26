@@ -6,7 +6,6 @@ export const PostList = createContext({
     fetching: false,
     editPost: {},
     addPost: {},
-    //addInitialPosts:{},
     deletePost: {}
 });
 
@@ -24,16 +23,13 @@ const postListReducer =(currentPostList, action)=> {
     }
      else if(action.type==='EdIT_POST') {
         newPostList = currentPostList.filter((post)=> post.id === action.payload.postId)
-    //    newPostList =  currentPostList.map(post => 
-    //     (action.payload.postId==post.id) ? {...post, title:editItem.title, body: editItem.body, reactions} : post )
      }
     return newPostList;
 }
 
 const PostListProvider =({children})=>{
-    // const [postList, dispatchPostList]= useReducer(postListReducer, DEFAULT_POST_LIST);
     const [postList, dispatchPostList]= useReducer(postListReducer, []);
-    const [fetching, setFetching] = useState(false);
+    //const [fetching, setFetching] = useState(false);
 
     const addPost=(post)=> {
         console.log("add post called",post);
@@ -83,44 +79,24 @@ const PostListProvider =({children})=>{
     const controller = new AbortController();
     const signal = controller.signal;
 
-     setFetching(true);
+     //setFetching(true);
      fetch('https://dummyjson.com/posts',{ signal })
       .then(res=>res.json()).then(data=>{ 
         let allposts= data.posts.map(pst=>({...pst, photoUrl: './images/no-image.jpg', reactions: pst.reactions.likes}));
           //console.log(allposts);
           addInitialPosts(allposts); 
-          setFetching(false);
+          //setFetching(false);
       });
 
-      return ()=>{
-        controller.abort();
-      }
+    //   return ()=>{
+    //     controller.abort();
+    //   }
   }, [])
 
-    return <PostList.Provider value={{postList, addPost, deletePost, editPost, fetching}}>
+    return <PostList.Provider value={{postList, addPost, deletePost, editPost}}>
         {children}
     </PostList.Provider>
 }
 
-const DEFAULT_POST_LIST =[
-    {
-        id:"1",
-        title:"Going to Mumbai",
-        body:"Hi Friends, I am going to Mumbai for my vacation. Hope to enjoy a lot.",
-        reactions:2,
-        photoUrl: './images/no-image.jpg',
-        userId: "user-9",
-        tags:["Vacation","Mumbai", "Enjoy"]
-    },
-     {
-        id:"2",
-        title:"Passing Graduation",
-        body:"Hi Friends, I have passed my Graduation finally.",
-        reactions:10,
-        photoUrl:'./images/grad-cap.jpg',
-        userId: "user-10",
-        tags:["Graduation","Pass"]
-    }
-]
 
 export default PostListProvider;

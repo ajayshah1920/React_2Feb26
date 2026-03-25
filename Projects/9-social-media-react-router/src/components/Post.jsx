@@ -30,7 +30,7 @@ const Post =({ postData }) =>{
             </div>
             <span className="position-absolute top-100 start-50 translate-middle p-2 bg-primary border border-light rounded-circle">
                 <img src="./images/thumbsup.jpg" className="img-fluid img-thumbnail" alt="thumbnail" width="30" height="30"></img>
-                   {" "+postData.reactions}
+                   {" " + postData.reactions}
             </span>
         </div> 
     )
