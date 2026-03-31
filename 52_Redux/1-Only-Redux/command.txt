@@ -1,0 +1,6 @@
+1. cmd: npm init -y 
+    For node.js config to create package.json
+2. cmd: npm i redux
+    For install redux library and create module
+3. cmd: node kg-coding-redux.js
+    For run kg-coding.js file.
