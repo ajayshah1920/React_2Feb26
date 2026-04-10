@@ -1,36 +1,41 @@
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
+//import { controlActions } from "../store/Index.js";
+import { controlActions } from "../store/Counter.js";
+import { privacyActions } from "../store/Privacy.js";
 
 const Controls=()=>{
     const dispatch = useDispatch();  //It use to dispatch data to reducer
     const inputElement = useRef();
 
     const handleIncrement=()=>{
-        dispatch({type:"INCREMENT"});
+        console.log("Incremented value: "+ controlActions.increment());
+        dispatch(controlActions.increment());
     }
 
     const handleDecrement=()=> {
-        dispatch({type:"DECREMENT"});
+        console.log("Decremented value: "+ controlActions.decrement());
+        dispatch(controlActions.decrement());
     }
 
     const handleAddition = ()=> {
        const inputVal = inputElement.current.value;
-       dispatch({type:'ADD', payload:{
+       dispatch(controlActions.add({
             num: inputVal
-       }});
+       }));     
        inputElement.current.value = "";
     }
 
     const handleSubstract = ()=> {
        const inputVal = inputElement.current.value;
-       dispatch({type:'MINUS', payload:{
+       dispatch(controlActions.substract({
             num: inputVal
-       }});
+       }));
         inputElement.current.value = "";
     }
 
     const handlePrivacy = () => {
-        dispatch({type:"PRIVACY_TOGGLE"})
+        dispatch(privacyActions.toggle());
     }
 
     return (
